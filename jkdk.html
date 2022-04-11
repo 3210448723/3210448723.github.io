@@ -1,0 +1,172 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>健康打卡助手</title>
+</head>
+<body>
+<div id="app">
+    <h1>请先登录！<a href="https://yqsb.hnust.edu.cn/attendance">点我跳转登录，授权登陆后即可退出</a></h1>
+
+    <button @click="jkdk">点我健康打卡</button>
+    <a href="https://yqsb.hnust.edu.cn/attendance">点我验证打卡是否成功</a>
+
+    <div>第一次使用？请输入相关信息</div>
+    <div>
+        姓名：<input type="text" v-model="name_"/>
+    </div>
+    <div>
+        学号：<input type="text" v-model="xgh"/>
+    </div>
+    <div>
+        电话号码：<input type="text" v-model="phone"/>
+    </div>
+    <div>
+        所在位置：<input type="text" v-model="address"/>
+    </div>
+    <button>
+        记住我？<input type="checkbox" @click="isSetCookie"/>
+    </button>
+</div>
+
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        mounted() {
+            // 读取cookie
+            this.name_=this.getCookie('name')
+            this.xgh=this.getCookie('xgh')
+            this.phone=this.getCookie('phone')
+            this.address=this.getCookie('address')
+        },
+        data() {
+            return {
+                // 记住我是否被选中
+                isRemember:false,
+                // 当前时间
+                millisecond_:0,
+
+                // cookie过期日期
+                exdays:10000,
+                // # 姓名
+                name_ : '',
+                // # 学工号
+                xgh :'',
+                phone : '',
+                // # 自己填的位置
+                address : '',
+                params: {
+                    // # 后面的为毫秒值，前面的不知道
+                    'JFTCB': '',
+                    // # 姓名：袁金敏
+                    'xm': this.name,
+                    'receiver': this.name,
+                    'yxid': 305,
+                    'xgh': this.xgh,
+                    'schoolid': '10534',
+                    'schoolname': '湖南科技大学',
+
+                    // 这里还要改
+                    // # 应该代表的是学生
+                    'usertype': 2,
+                    'nj': 2020,
+                    'yxname': '计算机科学与工程学院',
+                    'zy': '计算机科学与技术',
+                    'bh': 20050102,
+
+
+                    // # 定位
+                    'xtcuraddress': '',
+                    'phone': this.phone,
+
+
+                    'provinceNo': 117,
+                    'provinceName': '湖南省',
+                    'cityNo': 117003,
+                    'cityName': '湘潭市',
+                    'countyNo': 0,
+                    'countyName': '请选择',
+
+
+                    'address': this.address,
+                    'isbqz': 1,
+                    'by6': 1,
+                    'by5': 1,
+                    'iswh': 0,
+                    'isyjc': 1,
+                    'by3': 1,
+                    //'yqapp/1648086703688Screenshot_20220324_094422_com.tencent.mm.jpg'
+                    'jzjt': '',
+                    'jkmzl': 1,
+                    // 'yqapp/1647483646544QQ截图20220317101305.jpg'
+                    'jkmtp': '',
+                    'isbyx': 1,
+                    'jzzs': 3,
+
+
+                    'jzrq': '2021-08-19',
+
+
+                    'jzdd': 9,
+                    'by4': 1,
+                    'hsjc': 1,
+                    'tag': 0,
+                    'addressId': '',
+                    'returnUrl': 'https://yqsb.hnust.edu.cn/attendance',
+                    '_': ''
+                }
+            }
+        },
+        methods:{
+            // 是否设置
+            isSetCookie(){
+                this.isRemember=!this.isRemember
+                if (this.isRemember){
+                    this.setCookie('name',this.name_,this.exdays)
+                    this.setCookie('xgh',this.xgh,this.exdays)
+                    this.setCookie('phone',this.phone,this.exdays)
+                    this.setCookie('address',this.address,this.exdays)
+                    console.log('获取的cookie为：'+this.getCookie('name'))
+                }
+            },
+            //设置cookie cookie名称 值 过期天数
+            setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                console.info(cname + "=" + cvalue + "; " + expires);
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+                console.info(document.cookie);
+            },
+            //获取cookie
+            getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                console.log("获取cookie,现在循环")
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    console.log(c)
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) != -1){
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            },
+            // 发送打卡get请求
+            jkdk(){
+                let _this=this;
+                _this.millisecond_=new Date().getTime()
+                _this.params._=_this.millisecond_+5
+
+                this.params.JFTCB='jQuery11020656799283722654_' + this.millisecond_
+                axios.get("https://yqsb.hnust.edu.cn/attendance",{params: _this.params}).then(function (response) {
+                    console.log(response.data)
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
