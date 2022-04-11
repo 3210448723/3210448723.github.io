@@ -97,10 +97,10 @@
                     'isyjc': 1,
                     'by3': 1,
                     //'yqapp/1648086703688Screenshot_20220324_094422_com.tencent.mm.jpg'
-                    'jzjt': 'yqapp/1648086703688Screenshot_20220324_094422_com.tencent.mm.jpg',
+                    'jzjt': '',
                     'jkmzl': 1,
                     // 'yqapp/1647483646544QQ截图20220317101305.jpg'
-                    'jkmtp': 'yqapp/1647483646544QQ截图20220317101305.jpg',
+                    'jkmtp': '',
                     'isbyx': 1,
                     'jzzs': 3,
 
@@ -161,7 +161,14 @@
                 _this.params._=_this.millisecond_+5
 
                 this.params.JFTCB='jQuery11020656799283722654_' + this.millisecond_
-                axios.get("https://yqsb.hnust.edu.cn/attendance",{params: _this.params}).then(function (response) {
+                axios.get("https://yqsb.hnust.edu.cn/attendance",{params: _this.params},{headers:{
+                        'Referer': 'https://yqsb.hnust.edu.cn/attendance/saveAttendance',
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6304051b)',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Sec-Fetch-Site': 'same-origin',
+                        'Sec-Fetch-Mode': 'cors',
+                        'Sec-Fetch-Dest': 'empty',
+                    }}).then(function (response) {
                     console.log(response.data)
                 })
             }
