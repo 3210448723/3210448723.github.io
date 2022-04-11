@@ -7,11 +7,97 @@
 <div id="app">
     <h1>请先登录！<a href="https://yqsb.hnust.edu.cn/attendance">点我跳转登录，授权登陆后即可退出</a></h1>
 
-    <button>点我健康打卡</button>
+    <a :href="url">点我健康打卡</a>
     <a href="https://yqsb.hnust.edu.cn/attendance">点我验证打卡是否成功</a>
 
-    <a href="https://yqsb.hnust.edu.cn/attendance/saveAttendance?JFTCB=jQuery11020656799283722654_1649556233463&xm=%E7%BD%97%E5%BF%97&receiver=%E7%BD%97%E5%BF%97&yxid=305&xgh=2005010213&schoolid=10534&schoolname=%25E6%25B9%2596%25E5%258D%2597%25E7%25A7%2591%25E6%258A%2580%25E5%25A4%25A7%25E5%25AD%25A6&usertype=2&nj=2020&yxname=%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25A7%2591%25E5%25AD%25A6%25E4%25B8%258E%25E5%25B7%25A5%25E7%25A8%258B%25E5%25AD%25A6%25E9%2599%25A2&zy=%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25A7%2591%25E5%25AD%25A6%25E4%25B8%258E%25E6%258A%2580%25E6%259C%25AF&bh=20050102&xtcuraddress=&phone=18797761012&provinceNo=117&provinceName=%E6%B9%96%E5%8D%97%E7%9C%81&cityNo=117003&cityName=%E6%B9%98%E6%BD%AD%E5%B8%82&countyNo=0&countyName=%E8%AF%B7%E9%80%89%E6%8B%A9&address=%25E9%259B%25A8%25E6%25B9%2596%25E5%258C%25BA%25E6%25B9%2596%25E5%258D%2597%25E7%25A7%2591%25E6%258A%2580%25E5%25A4%25A7%25E5%25AD%25A6&isbqz=1&by6=1&by5=1&iswh=0&isyjc=1&by3=1&jzjt=yqapp%2F1648086703688Screenshot_20220324_094422_com.tencent.mm.jpg&jkmzl=1&jkmtp=yqapp%2F1647483646544QQ%E6%88%AA%E5%9B%BE20220317101305.jpg&isbyx=1&jzzs=3&jzrq=2021-08-19&jzdd=9&by4=1&hsjc=1&tag=0&addressId=&returnUrl=https%3A%2F%2Fyqsb.hnust.edu.cn%2Fattendance&_=1649556233468">
-        测试：</a>
+    <div>第一次使用？请输入相关信息</div>
+    <div>
+        姓名：<input type="text" v-model="name_"/>
+    </div>
+    <div>
+        学号：<input type="text" v-model="xgh"/>
+    </div>
+    <div>
+        电话号码：<input type="text" v-model="phone"/>
+    </div>
+    <div>
+        所在位置：<input type="text" v-model="address"/>
+    </div>
+    <button>
+        记住我？<input type="checkbox" @click="isSetCookie"/>
+    </button>
 </div>
+
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        mounted() {
+            // 读取cookie
+            this.name_ = this.getCookie('name')
+            this.xgh = this.getCookie('xgh')
+            this.phone = this.getCookie('phone')
+            this.address = this.getCookie('address')
+            this.url='https://yqsb.hnust.edu.cn/attendance/saveAttendance?JFTCB=jQuery11020656799283722654_1649556233463&xm='+this.name_+'&receiver='+this.name_+'&yxid=305&xgh='+this.xgh+'&schoolid=10534&schoolname=%25E6%25B9%2596%25E5%258D%2597%25E7%25A7%2591%25E6%258A%2580%25E5%25A4%25A7%25E5%25AD%25A6&usertype=2&nj=2020&yxname=%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25A7%2591%25E5%25AD%25A6%25E4%25B8%258E%25E5%25B7%25A5%25E7%25A8%258B%25E5%25AD%25A6%25E9%2599%25A2&zy=%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25A7%2591%25E5%25AD%25A6%25E4%25B8%258E%25E6%258A%2580%25E6%259C%25AF&bh=20050102&xtcuraddress=&phone=18797761012&provinceNo=117&provinceName=%E6%B9%96%E5%8D%97%E7%9C%81&cityNo=117003&cityName=%E6%B9%98%E6%BD%AD%E5%B8%82&countyNo=0&countyName=%E8%AF%B7%E9%80%89%E6%8B%A9&address='+this.address+'&isbqz=1&by6=1&by5=1&iswh=0&isyjc=1&by3=1&jzjt=yqapp%2F1648086703688Screenshot_20220324_094422_com.tencent.mm.jpg&jkmzl=1&jkmtp=yqapp%2F1647483646544QQ%E6%88%AA%E5%9B%BE20220317101305.jpg&isbyx=1&jzzs=3&jzrq=2021-08-19&jzdd=9&by4=1&hsjc=1&tag=0&addressId=&returnUrl=https%3A%2F%2Fyqsb.hnust.edu.cn%2Fattendance&_=1649556233468'
+        },
+        data() {
+            return {
+                // 记住我是否被选中
+                isRemember: false,
+                // 当前时间
+                millisecond_: 0,
+
+                // cookie过期日期
+                exdays: 10000,
+                // # 姓名
+                name_: '',
+                // # 学工号
+                xgh: '',
+                phone: '',
+                // # 自己填的位置
+                address: '',
+                url:'',
+            }
+        },
+        methods: {
+            // 是否设置
+            isSetCookie() {
+                this.isRemember = !this.isRemember
+                if (this.isRemember) {
+                    this.setCookie('name', this.name_, this.exdays)
+                    this.setCookie('xgh', this.xgh, this.exdays)
+                    this.setCookie('phone', this.phone, this.exdays)
+                    this.setCookie('address', this.address, this.exdays)
+                    console.log('获取的cookie为：' + this.getCookie('name'))
+                }
+            },
+            //设置cookie cookie名称 值 过期天数
+            setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                console.info(cname + "=" + cvalue + "; " + expires);
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+                console.info(document.cookie);
+            },
+            //获取cookie
+            getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                console.log("获取cookie,现在循环")
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    console.log(c)
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) != -1) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            },
+        }
+    })
+</script>
 </body>
 </html>
