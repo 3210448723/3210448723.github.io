@@ -1,0 +1,82 @@
+# ---------------------------------------------------------------
+# NexT Theme Settings
+# ---------------------------------------------------------------
+
+scheme: Mist
+darkmode: true
+
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: false
+
+avatar:
+  url: /images/avatar.jpg
+  rounded: true
+  rotated: false
+
+sidebar:
+  position: left
+  display: post
+  padding: 18
+  offset: 12
+
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at: true
+  categories: true
+
+post_wordcount:
+  item_text_total: true
+  item_text_time: true
+  totalcount: true
+  separated_meta: true
+
+codeblock:
+  copy_button: true
+  fold: false
+
+toc:
+  enable: true
+  number: false
+  wrap: false
+  expand_all: false
+  max_depth: 3
+
+back2top:
+  enable: true
+  sidebar: false
+  scrollpercent: true
+
+footer:
+  since: 2026
+  icon:
+    name: fa fa-heart
+    animated: false
+    color: "#808080"
+  powered:
+    enable: true
+  beian:
+    enable: false
+
+social:
+  GitHub: https://github.com/3210448723 || fab fa-github
+  E-Mail: mailto:youremail@example.com || fa fa-envelope
+
+social_icons:
+  enable: true
+  icons_only: false
+  transition: false
+
+local_search:
+  enable: true
+
+motion:
+  enable: false
