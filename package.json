@@ -1,8 +1,7 @@
 {
-  "name": "3210448723.github.io",
-  "version": "1.0.0",
+  "name": "hexo-site",
+  "version": "0.0.0",
   "description": "",
-  "main": "main.0cf68a.js",
   "scripts": {
     "clean": "hexo clean",
     "build": "hexo generate",
@@ -16,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "hexo": "^8.1.2",
     "hexo-generator-archive": "^2.0.0",
@@ -29,5 +27,11 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "hexo-cli": "^4.3.2"
+  },
+  "hexo": {
+    "version": "8.1.2"
+  }
 }
