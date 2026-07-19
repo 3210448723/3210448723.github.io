@@ -1,0 +1,97 @@
+# ---------------------------------------------------------------
+# NexT Theme Settings
+# ---------------------------------------------------------------
+
+# 主题风格：极简推荐 Mist
+scheme: Mist
+
+# 深色模式（跟随系统）
+darkmode: true
+
+# 菜单（简洁）
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: false
+
+# 头像
+avatar:
+  url: /images/avatar.jpg
+  rounded: true
+  rotated: false
+
+# 侧边栏
+sidebar:
+  position: left
+  display: post
+  padding: 18
+  offset: 12
+
+# 文章元信息（克制但实用）
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at: true
+  categories: true
+
+# 阅读体验
+post_wordcount:
+  item_text_total: true
+  item_text_time: true
+  totalcount: true
+  separated_meta: true
+
+# 代码高亮
+codeblock:
+  copy_button: true
+  fold: false
+
+# 目录
+toc:
+  enable: true
+  number: false
+  wrap: false
+  expand_all: false
+  max_depth: 3
+
+# 返回顶部
+back2top:
+  enable: true
+  sidebar: false
+  scrollpercent: true
+
+# 页脚简洁
+footer:
+  since: 2026
+  icon:
+    name: fa fa-heart
+    animated: false
+    color: "#808080"
+  powered:
+    enable: true
+  beian:
+    enable: false
+
+# 社交（按需改）
+social:
+  GitHub: https://github.com/3210448723 || fab fa-github
+  E-Mail: mailto:youremail@example.com || fa fa-envelope
+
+social_icons:
+  enable: true
+  icons_only: false
+  transition: false
+
+# 本地搜索（简洁实用）
+local_search:
+  enable: true
+
+# 关闭花哨动画
+motion:
+  enable: false
