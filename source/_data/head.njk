@@ -1,6 +1,21 @@
+{# Apply the saved theme before the first paint to avoid a dark-mode flash. #}
+<script>
+  (() => {
+    const key = 'yjm-theme';
+    let saved;
+    try { saved = localStorage.getItem(key); } catch {}
+    const theme = saved === 'light' || saved === 'dark'
+      ? saved
+      : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.classList.add('theme-preload');
+  })();
+</script>
+
 {# Site-level SEO metadata. The theme's Open Graph helper remains responsible for social cards. #}
 {%- if config.keywords %}
 <meta name="keywords" content="{{ config.keywords | join(', ') }}">
 {%- endif %}
 <meta name="author" content="{{ author }}">
 <meta name="application-name" content="{{ title }}">
+<script src="{{ config.root }}js/enhancements.js" defer></script>

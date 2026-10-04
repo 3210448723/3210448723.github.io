@@ -1,0 +1,52 @@
+{%- set previous_post = page.next %}
+{%- set following_post = page.prev %}
+{%- set article_toc = toc(page.content, {class: 'nav', list_number: page.toc.number, max_depth: page.toc.max_depth}) if page.toc else '' %}
+
+<div class="yjm-article-enhancements">
+  {%- if page.toc and page.toc.enable and article_toc.length > 1 %}
+    <button class="yjm-toc-toggle" type="button" aria-label="打开文章目录" aria-expanded="false">
+      <i class="fa fa-list-ul" aria-hidden="true"></i>
+      <span>文章目录</span>
+    </button>
+  {%- endif %}
+
+  {%- if site.posts.length > 1 %}
+    <section class="yjm-related-posts" aria-labelledby="yjm-related-title">
+      <div class="yjm-section-heading">
+        <span class="yjm-section-kicker">EXPLORE MORE</span>
+        <h2 id="yjm-related-title"><i class="fa fa-compass" aria-hidden="true"></i> 相关文章</h2>
+      </div>
+      <div class="yjm-related-grid">
+        {%- for related in site.posts.toArray() %}
+          {%- if related.path !== page.path and loop.index <= 4 %}
+            <a class="yjm-related-card" href="{{ url_for(related.path) }}" rel="bookmark">
+              <span class="yjm-related-date">{{ date(related.date) }}</span>
+              <strong>{{ related.title }}</strong>
+              {%- if related.description %}<span>{{ related.description }}</span>{% endif %}
+              <i class="fa fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          {%- endif %}
+        {%- endfor %}
+      </div>
+    </section>
+  {%- endif %}
+
+  {%- if previous_post or following_post %}
+    <nav class="yjm-post-navigation" aria-label="文章导航">
+      {%- if previous_post %}
+        <a class="yjm-post-nav-card yjm-post-nav-previous" href="{{ url_for(previous_post.path) }}" rel="prev">
+          <span class="yjm-post-nav-label"><i class="fa fa-arrow-left" aria-hidden="true"></i> 上一篇</span>
+          <strong>{{ previous_post.title }}</strong>
+        </a>
+      {%- else %}
+        <span class="yjm-post-nav-card is-empty"></span>
+      {%- endif %}
+      {%- if following_post %}
+        <a class="yjm-post-nav-card yjm-post-nav-following" href="{{ url_for(following_post.path) }}" rel="next">
+          <span class="yjm-post-nav-label">下一篇 <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+          <strong>{{ following_post.title }}</strong>
+        </a>
+      {%- endif %}
+    </nav>
+  {%- endif %}
+</div>

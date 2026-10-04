@@ -8,9 +8,12 @@ scheme: Mist
 # 使用站点级覆盖文件，避免直接修改 themes/next，便于后续升级主题。
 custom_file_path:
   head: source/_data/head.njk
+  header: source/_data/header.njk
+  postMeta: source/_data/post-meta.njk
+  postBodyEnd: source/_data/post-body-end.njk
   style: source/_data/styles.styl
 
-# 深色模式（跟随系统）
+# 深色模式（默认跟随系统，也支持手动切换并记忆偏好）
 darkmode: true
 
 # 浏览器地址栏与移动端状态栏颜色。
@@ -75,7 +78,7 @@ local_search:
   unescape: true
   preload: false
 
-# 正文阅读统计使用 NexT 内置配置；不启用未安装的 word-counter 插件。
+# 正文阅读统计由 source/js/enhancements.js 轻量计算，不依赖额外 word-counter 插件。
 symbols_count_time:
   separated_meta: true
   item_text_total: true
@@ -86,6 +89,7 @@ motion:
 
 # 代码块与阅读进度条
 codeblock:
+  language: true
   copy_button:
     enable: true
     style: mac
@@ -99,6 +103,9 @@ reading_progress:
   reversed: false
   color: "#5b61d6"
   height: 4px
+
+# 使用自定义卡片替代主题默认的简略上下篇链接。
+post_navigation: false
 
 back2top:
   enable: true
