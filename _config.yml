@@ -3,9 +3,14 @@
 
 # Site
 title: YJM的个人博客
-subtitle: ''
-description: ''
+subtitle: 记录学习，也记录成长
+description: YJM 的个人博客，记录人工智能、软件测试等课程笔记与技术思考。
 keywords:
+  - YJM
+  - 个人博客
+  - 人工智能
+  - 软件测试
+  - 学习笔记
 author: YJM
 language: zh-CN
 timezone: Asia/Shanghai

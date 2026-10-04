@@ -1,0 +1,6 @@
+{# Site-level SEO metadata. The theme's Open Graph helper remains responsible for social cards. #}
+{%- if config.keywords %}
+<meta name="keywords" content="{{ config.keywords | join(', ') }}">
+{%- endif %}
+<meta name="author" content="{{ author }}">
+<meta name="application-name" content="{{ title }}">

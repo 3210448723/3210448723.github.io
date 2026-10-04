@@ -5,8 +5,18 @@
 # 主题风格：极简推荐 Mist
 scheme: Mist
 
+# 使用站点级覆盖文件，避免直接修改 themes/next，便于后续升级主题。
+custom_file_path:
+  head: source/_data/head.njk
+  style: source/_data/styles.styl
+
 # 深色模式（跟随系统）
 darkmode: true
+
+# 浏览器地址栏与移动端状态栏颜色。
+theme_color:
+  light: "#5b61d6"
+  dark: "#171a2b"
 
 # 菜单（简洁）
 menu:
@@ -18,11 +28,11 @@ menu:
 
 menu_settings:
   icons: true
-  badges: false
+  badges: true
 
 # 头像
 avatar:
-  url: /images/avatar.jpg
+  url: /img/head.jpg
   rounded: true
   rotated: false
 
@@ -40,18 +50,6 @@ post_meta:
   updated_at: true
   categories: true
 
-# 阅读体验
-post_wordcount:
-  item_text_total: true
-  item_text_time: true
-  totalcount: true
-  separated_meta: true
-
-# 代码高亮
-codeblock:
-  copy_button: true
-  fold: false
-
 # 目录
 toc:
   enable: true
@@ -60,38 +58,59 @@ toc:
   expand_all: false
   max_depth: 3
 
-# 返回顶部
+# 社交（按需改）
+social:
+  GitHub: https://github.com/3210448723 || fab fa-github
+  CSDN: https://blog.csdn.net/qq_33843237/ || fa fa-book
+
+social_icons:
+  enable: true
+  icons_only: false
+  transition: true
+
+# 本地搜索
+local_search:
+  enable: true
+  top_n_per_article: 2
+  unescape: true
+  preload: false
+
+# 正文阅读统计使用 NexT 内置配置；不启用未安装的 word-counter 插件。
+symbols_count_time:
+  separated_meta: true
+  item_text_total: true
+
+# 关闭花哨动画
+motion:
+  enable: false
+
+# 代码块与阅读进度条
+codeblock:
+  copy_button:
+    enable: true
+    style: mac
+  fold:
+    enable: false
+
+reading_progress:
+  enable: true
+  start_at: left
+  position: top
+  reversed: false
+  color: "#5b61d6"
+  height: 4px
+
 back2top:
   enable: true
   sidebar: false
   scrollpercent: true
 
-# 页脚简洁
 footer:
-  since: 2026
+  since: 2023
   icon:
-    name: fa fa-heart
+    name: fa fa-sparkles
     animated: false
-    color: "#808080"
-  powered:
-    enable: true
+    color: "#5b61d6"
+  powered: true
   beian:
     enable: false
-
-# 社交（按需改）
-social:
-  GitHub: https://github.com/3210448723 || fab fa-github
-  E-Mail: mailto:youremail@example.com || fa fa-envelope
-
-social_icons:
-  enable: true
-  icons_only: false
-  transition: false
-
-# 本地搜索（简洁实用）
-local_search:
-  enable: true
-
-# 关闭花哨动画
-motion:
-  enable: false
